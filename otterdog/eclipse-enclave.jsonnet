@@ -41,6 +41,14 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       workflows+: {
         default_workflow_permissions: "write",
       },
+      secrets: [
+        orgs.newRepoSecret('DEPLOY_TOKEN') {
+          value: "pass:bots/ecd.enclave/github.com/publish-token",
+        },
+        orgs.newRepoSecret('DEPLOY_PREVIEW_TOKEN') {
+          value: "pass:bots/ecd.enclave/github.com/preview-token",
+        },
+      ],
     },
     orgs.newRepo('enclave-website') {
       allow_merge_commit: true,
@@ -48,7 +56,9 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       default_branch: "main",
       delete_branch_on_merge: true,
       description: "Hosting enclave-website",
-      gh_pages_build_type: "workflow",
+      gh_pages_build_type: "legacy",
+      gh_pages_source_branch: "gh-pages",
+      gh_pages_source_path: "/",
       homepage: "https://www.eclipse.dev/enclave",
       web_commit_signoff_required: false,
       workflows+: {
@@ -62,12 +72,10 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       environments: [
         orgs.newEnvironment('github-pages') {
           branch_policies+: [
-            "gh-pages",
-            "master"
+            "gh-pages"
           ],
           deployment_branch_policy: "selected",
         },
-        orgs.newEnvironment('pull-request-preview'),
       ],
     },
     orgs.newRepo('enclave-website-previews') {
