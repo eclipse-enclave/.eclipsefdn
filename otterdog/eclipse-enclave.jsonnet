@@ -20,7 +20,6 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
     orgs.newRepo('enclave') {
       allow_update_branch: false,
       allow_merge_commit: true,
-      allow_update_branch: false,
       delete_branch_on_merge: true,
       description: "Sandbox for running AI coding agents autonomously: isolated, network-restricted, host-safe",
       has_discussions: true,
