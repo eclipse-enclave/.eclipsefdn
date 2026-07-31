@@ -4,9 +4,6 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
   settings+: {
     description: "",
     members_can_change_project_visibility: false,
-    members_can_change_repo_visibility: false,
-    members_can_create_teams: false,
-    members_can_delete_repositories: false,
     name: "Eclipse Enclave project",
     packages_containers_internal: false,
     packages_containers_public: false,
@@ -17,6 +14,9 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
     },
   },
   secrets+: [
+    orgs.newOrgSecret('DEPLOY_TOKEN') {
+      value: "pass:bots/ecd.enclave/github.com/api-token-hd7681",
+    },
     orgs.newOrgSecret('SCP_KEY') {
       value: "pass:bots/ecd.enclave/projects-storage.eclipse.org/id_ed25519",
     },
@@ -29,25 +29,24 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
   ],
   _repositories+:: [
     orgs.newRepo('enclave') {
-      allow_update_branch: false,
       allow_merge_commit: true,
-      delete_branch_on_merge: true,
+      allow_update_branch: false,
       description: "Sandbox for running AI coding agents autonomously: isolated, network-restricted, host-safe",
       has_discussions: true,
       has_wiki: false,
       homepage: "https://www.eclipse.dev/enclave",
-      topics+: [
-        "ai-agents",
-        "claude-code",
-        "sandbox",
-        "docker",
-        "agentic-ai",
-        "developer-tools",
-        "cli",
-        "security"
-      ],
       secret_scanning: "disabled",
       secret_scanning_push_protection: "disabled",
+      topics+: [
+        "agentic-ai",
+        "ai-agents",
+        "claude-code",
+        "cli",
+        "developer-tools",
+        "docker",
+        "sandbox",
+        "security"
+      ],
       web_commit_signoff_required: false,
       workflows+: {
         default_workflow_permissions: "write",
@@ -56,14 +55,14 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
     orgs.newRepo('enclave-website') {
       allow_merge_commit: true,
       allow_update_branch: false,
-      default_branch: "main",
-      delete_branch_on_merge: true,
       description: "Hosting enclave-website",
-      gh_pages_build_type: "workflow",
+      gh_pages_build_type: "legacy",
+      gh_pages_source_branch: "gh-pages",
+      gh_pages_source_path: "/",
       homepage: "https://www.eclipse.dev/enclave",
       web_commit_signoff_required: false,
       workflows+: {
-        enabled: false,
+        default_workflow_permissions: "write",
       },
       branch_protection_rules: [
         orgs.newBranchProtectionRule('main') {
@@ -74,11 +73,13 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
         orgs.newEnvironment('github-pages') {
           branch_policies+: [
             "gh-pages",
+            "main",
             "master"
           ],
           deployment_branch_policy: "selected",
         },
-        orgs.newEnvironment('pull-request-preview'),
+        orgs.newEnvironment('pull-request-preview') {
+        },
       ],
     },
     orgs.newRepo('enclave-website-previews') {
