@@ -34,7 +34,7 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       description: "Sandbox for running AI coding agents autonomously: isolated, network-restricted, host-safe",
       has_discussions: true,
       has_wiki: false,
-      homepage: "https://www.eclipse.dev/enclave",
+      homepage: "https://enclave.eclipse.dev",
       secret_scanning: "disabled",
       secret_scanning_push_protection: "disabled",
       topics+: [
@@ -59,7 +59,7 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       gh_pages_build_type: "legacy",
       gh_pages_source_branch: "gh-pages",
       gh_pages_source_path: "/",
-      homepage: "https://www.eclipse.dev/enclave",
+      homepage: "https://enclave.eclipse.dev",
       web_commit_signoff_required: false,
       workflows+: {
         default_workflow_permissions: "write",
