@@ -52,6 +52,27 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
         default_workflow_permissions: "write",
       },
     },
+    orgs.newRepo('enclave-extensions') {
+      allow_merge_commit: true,
+      allow_update_branch: false,
+      description: "Community tool and feature extensions for Eclipse Enclave",
+      has_discussions: false,
+      has_wiki: false,
+      homepage: "https://enclave.eclipse.dev",
+      secret_scanning: "disabled",
+      secret_scanning_push_protection: "disabled",
+      topics+: [
+        "agentic-ai",
+        "ai-agents",
+        "claude-code",
+        "cli",
+        "developer-tools",
+        "docker",
+        "sandbox",
+        "security"
+      ],
+      web_commit_signoff_required: false
+    },
     orgs.newRepo('enclave-website') {
       allow_merge_commit: true,
       allow_update_branch: false,
