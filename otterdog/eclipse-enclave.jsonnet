@@ -31,12 +31,11 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
     orgs.newRepo('enclave') {
       allow_merge_commit: true,
       allow_update_branch: false,
+      dependabot_alerts_enabled: false,
       description: "Sandbox for running AI coding agents autonomously: isolated, network-restricted, host-safe",
       has_discussions: true,
       has_wiki: false,
       homepage: "https://enclave.eclipse.dev",
-      secret_scanning: "disabled",
-      secret_scanning_push_protection: "disabled",
       topics+: [
         "agentic-ai",
         "ai-agents",
@@ -55,6 +54,9 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
         orgs.newBranchProtectionRule('main') {
           required_approving_review_count: 0,
         },
+      ],
+      environments: [
+        orgs.newEnvironment('copilot'),
       ],
     },
     orgs.newRepo('enclave-extensions') {
@@ -90,8 +92,6 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       has_discussions: false,
       has_wiki: false,
       homepage: "https://enclave.eclipse.dev",
-      secret_scanning: "disabled",
-      secret_scanning_push_protection: "disabled",
       topics+: [
         "agentic-ai",
         "ai-agents",
