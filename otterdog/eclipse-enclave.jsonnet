@@ -51,6 +51,11 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       workflows+: {
         default_workflow_permissions: "write",
       },
+      branch_protection_rules: [
+        orgs.newBranchProtectionRule('main') {
+          required_approving_review_count: 0,
+        },
+      ],
     },
     orgs.newRepo('enclave-extensions') {
       allow_merge_commit: true,
@@ -71,7 +76,40 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
         "sandbox",
         "security"
       ],
-      web_commit_signoff_required: false
+      web_commit_signoff_required: false,
+      branch_protection_rules: [
+        orgs.newBranchProtectionRule('main') {
+          required_approving_review_count: 0,
+        },
+      ],
+    },
+    orgs.newRepo('homeshell') {
+      allow_merge_commit: true,
+      allow_update_branch: false,
+      description: "A lightweight control plane for AI-assisted development",
+      has_discussions: false,
+      has_wiki: false,
+      homepage: "https://enclave.eclipse.dev",
+      secret_scanning: "disabled",
+      secret_scanning_push_protection: "disabled",
+      topics+: [
+        "agentic-ai",
+        "ai-agents",
+        "claude-code",
+        "desktop",
+        "developer-tools",
+        "go",
+        "react"
+      ],
+      web_commit_signoff_required: false,
+      workflows+: {
+        default_workflow_permissions: "write",
+      },
+      branch_protection_rules: [
+        orgs.newBranchProtectionRule('main') {
+          required_approving_review_count: 0,
+        },
+      ],
     },
     orgs.newRepo('enclave-website') {
       allow_merge_commit: true,
@@ -126,6 +164,12 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
 } + {
   # snippet added due to 'https://github.com/eclipsefdn/otterdog-configs/blob/main/blueprints/add-dot-github-repo.yml'
   _repositories+:: [
-    orgs.newRepo('.github')
+    orgs.newRepo('.github') {
+      branch_protection_rules: [
+        orgs.newBranchProtectionRule('main') {
+          required_approving_review_count: 0,
+        },
+      ],
+    },
   ],
 }
