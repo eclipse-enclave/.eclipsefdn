@@ -57,6 +57,7 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       ],
       environments: [
         orgs.newEnvironment('copilot'),
+        orgs.newEnvironment('release'),
       ],
     },
     orgs.newRepo('enclave-extensions') {
@@ -109,6 +110,9 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
         orgs.newBranchProtectionRule('main') {
           required_approving_review_count: 0,
         },
+      ],
+      environments: [
+        orgs.newEnvironment('release'),
       ],
     },
     orgs.newRepo('enclave-website') {
