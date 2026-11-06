@@ -57,6 +57,7 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       ],
       environments: [
         orgs.newEnvironment('copilot'),
+        orgs.newEnvironment('release'),
       ],
     },
     orgs.newRepo('enclave-extensions') {
@@ -89,7 +90,7 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
       allow_merge_commit: true,
       allow_update_branch: false,
       description: "A lightweight control plane for AI-assisted development",
-      has_discussions: false,
+      has_discussions: true,
       has_wiki: false,
       homepage: "https://enclave.eclipse.dev",
       topics+: [
@@ -109,6 +110,9 @@ orgs.newOrg('ecd.enclave', 'eclipse-enclave') {
         orgs.newBranchProtectionRule('main') {
           required_approving_review_count: 0,
         },
+      ],
+      environments: [
+        orgs.newEnvironment('release'),
       ],
     },
     orgs.newRepo('enclave-website') {
